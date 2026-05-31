@@ -7,6 +7,6 @@ for num in number:
 
 num_list.sort(reverse=True)
 
-print(str(num_list))
+num_list = [str(num) for num in num_list]
 
-
+print("".join(num_list))
