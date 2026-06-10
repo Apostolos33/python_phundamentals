@@ -1,14 +1,14 @@
-def check_lenght(some_password: str) -> str or None:
+def check_lenght(some_password: str) -> str:
     if 6 <= len(some_password) <= 10:
         return None
     return "Password must be between 6 and 10 characters"
 
-def check_characters(some_password: str) -> str or bool:
+def check_characters(some_password: str) -> str:
     if some_password.isalnum():
         return None
     return "Password must consist only of letters and digits"
 
-def check_digits(some_password: str) -> str or bool:
+def check_digits(some_password: str) -> str:
     digits = 0
 
     for digit in some_password:
