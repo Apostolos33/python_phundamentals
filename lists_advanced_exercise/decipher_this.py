@@ -1,5 +1,4 @@
 secret_message = input().split()
-print(secret_message) 
 
 for message in secret_message:
     message = list(message)
