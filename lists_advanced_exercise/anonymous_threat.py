@@ -1,41 +1,41 @@
-array_of_data = input().split()
+strings = input().split()
 
 command = input()
 
 while command != "3:1":
     command_as_list = command.split()
-    if command_as_list[0] == "merge":
-        start_index, end_index = int(command_as_list[1]), int(command_as_list[2])
-        if start_index in range(len(array_of_data)):
-            if end_index in range(len(array_of_data)):
-                for index in range(start_index, end_index + 1):
-                    array_of_data[start_index] += array_of_data[index]
-                for index in range(start_index +1, end_index + 1):
-                    array_of_data[index] = "."
-                array_of_data = [x for x in array_of_data if x != "."]
-            else:
-                for index in range(start_index + 1, len(array_of_data) - 1):
-                    array_of_data[start_index] += array_of_data[index]
-                for index in range(start_index + 1, len(array_of_data) -1):
-                    array_of_data[index] = "."
-                array_of_data = [x for x in array_of_data if x != "."]
-        
-    elif command_as_list[0] == "divide":
-        index, partitions = int(command_as_list[1]), int(command_as_list[2])
-        target = array_of_data[index]
-        part_len = len(target) // partitions
+    action = command_as_list[0]
 
-        new_parts = []
+    if action == "merge":
+        startindex = int(command_as_list[1])
+        endindex = int(command_as_list[2])
+        startindex = max(0, startindex)
+        endindex = min(len(strings) -1, endindex)
+
+        if startindex < endindex:
+            merged_string = "".join(strings[startindex : endindex + 1])
+            strings[startindex : endindex + 1] = [merged_string]
+
+    elif action == "divide":
+        index = int(command_as_list[1])
+        partitions = int(command_as_list[2])
+
+        target_string = strings[index]
+        len_partitions = len(target_string) // partitions
+
+        new_list = []
+        start = 0
+        end = 1
         for i in range(partitions):
             if i == partitions - 1:
-                new_parts.append(target[i * part_len:])
-            else:
-                new_parts.append(target[i * part_len : (i + 1) * part_len])
-
-        array_of_data[index : index + 1] = new_parts
-
-
+                new_list.append(target_string[i * len_partitions:])
+                break
+            new_list.append(target_string[start * len_partitions : end * len_partitions])
+            start += 1
+            end += 1
+        strings[index : index + 1] = new_list
 
     command = input()
 
-print(array_of_data)
+for string in strings:
+    print(string, end=" ")
